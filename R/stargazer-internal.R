@@ -18,7 +18,8 @@ function(libname, pkgname) {
            omit.yes.no, order, ord.intercepts, perl, report, rownames,
            rq.se, selection.equation, single.row, star.char, star.cutoffs, suppress.errors, 
            table.layout, table.placement, 
-           zero.component, summary.logical, summary.stat, nobs, mean.sd, min.max, median, iqr, warn) {
+           zero.component, summary.logical, summary.stat, nobs, mean.sd, min.max, median, iqr, warn,
+           custom_alignment = NA) {
      
   .add.model <-
   function(object.name, user.coef=NULL, user.se=NULL, user.t=NULL, user.p=NULL, auto.t=TRUE, auto.p=TRUE, user.ci.lb=NULL, user.ci.rb=NULL) {
@@ -3930,6 +3931,7 @@ function(libname, pkgname) {
     function(object) {
       .floating.header()
       
+      if(is.na(custom_alignment)){
       .formatting.alignment <- paste("@{\\extracolsep{",.format.column.sep.width,"}} ", sep="")
       for (i in seq(1:(length(names(object))))) {
         if (.format.dec.mark.align == FALSE) {
@@ -3940,7 +3942,9 @@ function(libname, pkgname) {
         }
       }
       #
-      
+      }else{
+        .formatting.alignment = custom_alignment
+      }
       cat("\\begin{tabular}{",.formatting.alignment,"} \n",sep="")
     }
   
@@ -4302,6 +4306,7 @@ function(libname, pkgname) {
     .floating.header()
 
     #
+    if(is.na(custom_alignment)){
     .formatting.alignment <- paste("@{\\extracolsep{",.format.column.sep.width,"}}l", sep="")
     
     if (.format.flip == FALSE) { width <- length(.format.s.statistics.list) }
@@ -4316,7 +4321,9 @@ function(libname, pkgname) {
         }
       }
       #
-  
+    }else{
+      .formatting.alignment = custom_alignment
+    }
     cat("\\begin{tabular}{",.formatting.alignment,"} \n",sep="")
   }
   
@@ -4643,6 +4650,7 @@ function(libname, pkgname) {
       .floating.header()
 
       #
+    if(is.na(custom_alignment)){
       .formatting.alignment <- paste("@{\\extracolsep{",.format.column.sep.width,"}}l", sep="")
       for (i in seq(1:length(.global.models))) {
   	    if (.format.dec.mark.align==FALSE) {
@@ -4653,6 +4661,9 @@ function(libname, pkgname) {
         }
       }
       #
+    }else{
+      .formatting.alignment = custom_alignment
+    }
 
       cat("\\begin{tabular}{",.formatting.alignment,"} \n",sep="")
   }

@@ -17,7 +17,7 @@ function(..., type = "latex", title="", style="default", summary=NULL, out=NULL,
          rq.se = "nid", selection.equation=FALSE, single.row=FALSE, star.char=NULL, 
          star.cutoffs=NULL, suppress.errors=FALSE, table.layout=NULL, table.placement = "!htbp", zero.component=FALSE, 
          summary.logical=TRUE, summary.stat=NULL, nobs=TRUE, mean.sd=TRUE, min.max=TRUE, median=FALSE, 
-         iqr=FALSE) {
+         iqr=FALSE, custom_alignment = NA) {
   
   save.warn.option <- getOption("warn") 
   options(warn=-1)
@@ -54,5 +54,5 @@ function(..., type = "latex", title="", style="default", summary=NULL, out=NULL,
                          summary.logical = summary.logical,
                          summary.stat = summary.stat,
                          nobs=nobs, mean.sd=mean.sd, 
-                         min.max=min.max, median=median, iqr=iqr, warn=save.warn.option))
+                         min.max=min.max, median=median, iqr=iqr, warn=save.warn.option, custom_alignment = custom_alignment))
 }
